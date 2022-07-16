@@ -1,13 +1,110 @@
 body {
   margin: 0;
+  padding: 50px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.sub_btn {
+  position: absolute;
+  right: 50px;
+  padding: 15px;
+  border:none;
+  background-color: aliceblue;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.sub_btn:hover {
+  background-color: rgba(195, 195, 195, 0.6);
+}
+
+.employee_ul {
+  display: flex;
+  align-content: space-between;
+  list-style: none;
+  gap: 50px;
+  position: relative;
+}
+
+.employee_ul li {
+  width: 300px;
+}
+
+.form {
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  margin: auto;
+  width: 700px;
+  border: 1px solid aliceblue;
+  border-radius: 10px;
+  padding: 50px;
+  gap: 5px;
+  background-color: aliceblue;
+}
+
+.form input {
+  padding: 8px;
+  border: 1px lightgray solid;
+  border-radius: 5px;
+}
+
+.form label {
+  font-weight: 500;
+}
+
+.accommodation, .department, .status, .names, .email, .ID {
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  border: 1px lightgray solid;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel_save_btn {
+  margin-top:15px;
+  position: relative;
+}
+
+.cancel_btn {
+  position: absolute;
+  right:0;
+  width:90px;
+  padding:10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: rgb(225, 225, 225);
+}
+
+.save_btn {
+  position: absolute;
+  right: 100px;
+  width: 90px;
+  padding: 10px;
+  border:none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: rgb(225, 225, 225);
+}
+
+.save_btn:hover {
+  background-color: rgba(195, 195, 195, 0.6);
+}
+
+.cancel_btn:hover {
+  background-color: rgba(195, 195, 195, 0.6);
 }
