@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { data } from "../data/departmentAndStatus";
+import { data } from "../pureFunctions/departmentAndStatus";
 import Employees from "./Employees";
+import { filteredEmployees } from "../pureFunctions/filter";
 
 function Filters({ employees }) {
   const initialValues = {
@@ -10,56 +11,36 @@ function Filters({ employees }) {
     status: '',
     email: ''
   }
-  console.log('employees', employees);
 
   const [values, setValues] = useState(initialValues);
-  const [filteredEmployees, setFilteredEmployees] = useState(null);
-    
-
-  console.log('filteredEmp ', filteredEmployees);
+  const [filteredEmployeesState, setFilteredEmployeesState] = useState(null);
 
   function handleChange(e) {
     const {name, value} = e.target;
-    console.log(name);
     setValues({
       ...values,
       [name]: value,
     });
     switch(name) {
       case 'name':
-        employees.map(employee => (employee.name === value) 
-          ? setFilteredEmployees(employee)
-          : null
-          )
+        setFilteredEmployeesState(filteredEmployees(employees, value, 'name'));
         break;
       case 'ID':
-        employees.map(employee => (employee.ID === value) 
-          ? setFilteredEmployees(employee)
-          : null
-          )
+        setFilteredEmployeesState(filteredEmployees(employees, value, 'ID'));
         break;
       case 'department':
-        employees.map(employee => (employee.department === value) 
-          ? setFilteredEmployees(employee)
-          : null
-          )
+        setFilteredEmployeesState(filteredEmployees(employees, value, 'department'));
         break;
       case 'status':
-        employees.map(employee => (employee.status === value) 
-          ? setFilteredEmployees(employee)
-          : null
-          )
+        setFilteredEmployeesState(filteredEmployees(employees, value, 'status'));
         break;
       case 'email':
-        employees.map(employee => (employee.email === value) 
-          ? setFilteredEmployees(employee)
-          : null
-          )
+        setFilteredEmployeesState(filteredEmployees(employees, value, 'email'));
         break;
       default:
+        setFilteredEmployeesState(null);
         console.log('No filters applied!')  
     }
-
   }
 
   return (
@@ -72,8 +53,8 @@ function Filters({ employees }) {
         onChange={handleChange}
       >
         <option value="">All employees</option>
-        {employees.map(employee => (
-          <option>{employee.name}</option>
+        {employees.map((employee, idx) => (
+          <option key={idx}>{employee.name}</option>
         ))}
       </select>
 
@@ -85,8 +66,8 @@ function Filters({ employees }) {
         onChange={handleChange} 
       >
         <option value="">Filter By ID</option>
-        {employees.map(employee => (
-          <option>{employee.ID}</option>
+        {employees.map((employee,idx) => (
+          <option key={idx}>{employee.ID}</option>
         ))}
       </select>
 
@@ -98,8 +79,8 @@ function Filters({ employees }) {
         onChange={handleChange}
       >
         <option value="">Filter By Department</option>
-        {data.departments.map(dep => (
-          <option>{dep}</option>
+        {data.departments.map((dep,idx) => (
+          <option key={idx}>{dep}</option>
         ))}
       </select>
 
@@ -111,8 +92,8 @@ function Filters({ employees }) {
         onChange={handleChange}
       >
         <option value="">Filter By Status</option>
-        {data.statuses.map(stat => (
-          <option>{stat}</option>
+        {data.statuses.map((stat,idx) => (
+          <option key={idx}>{stat}</option>
         ))}
       </select>
 
@@ -124,17 +105,33 @@ function Filters({ employees }) {
         onChange={handleChange}
       >
         <option value="">Filter By Email</option>
-        {employees.map(employee => (
-          <option>{employee.email}</option>
+        {employees.map((employee,idx) => (
+          <option key={idx}>{employee.email}</option>
         ))}
       </select>
 
-      {filteredEmployees === null 
-        ? employees.map(emp => <Employees {...emp} />)
-        : <Employees {...filteredEmployees} />
-      }
+      <button 
+        className="clear_btn"
+        onClick={(e) => {
+          setFilteredEmployeesState(null);
+          setValues(initialValues);
+        }}
+      >
+        Clear Filters
+      </button>
+
+      <ul className="title_ul">
+        <li>Name</li>
+        <li>ID</li>
+        <li>Department</li>
+        <li>Status</li>
+        <li>Email</li>
+      </ul>  
       
-    
+      {filteredEmployeesState === null
+        ? employees.map(emp => <Employees {...emp} key={emp.id}/>)
+        : filteredEmployeesState.map(emp => <Employees {...emp} key={emp.id}/>)
+      }
     </div>
   );
 }

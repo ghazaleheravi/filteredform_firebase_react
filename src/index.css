@@ -29,7 +29,7 @@ code {
   background-color: rgba(195, 195, 195, 0.6);
 }
 
-.employee_ul {
+.employee_ul, .title_ul {
   display: flex;
   align-content: space-between;
   list-style: none;
@@ -39,6 +39,12 @@ code {
 
 .employee_ul li {
   width: 300px;
+}
+
+.title_ul li {
+  width: 300px;
+  font-weight: 700;
+  margin-top: 20px;
 }
 
 .form {
@@ -107,4 +113,15 @@ code {
 
 .cancel_btn:hover {
   background-color: rgba(195, 195, 195, 0.6);
+}
+
+.clear_btn {
+  width: 120px;
+  padding: 10px;
+  margin-left: 15px;
+  border: 1px lightgray solid;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: aliceblue;
+  font-weight: 600;
 }

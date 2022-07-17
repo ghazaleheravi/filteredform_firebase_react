@@ -19,7 +19,7 @@ function Form(props) {
   }
 
   const [values, setValues] = useState(initialVal);
-  console.log(values);
+ 
   const createEmployee = () => {
     addDoc(employeesCollectionRef, values)
     .then(() => {
@@ -48,10 +48,15 @@ function Form(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     setLoader(true);
     createEmployee();
     uploadFile();
+
     setValues(initialVal);
+
+    props.setFormView(false);
+    window.location.reload();
   }
 
   return (
@@ -133,7 +138,7 @@ function Form(props) {
         id='uploadInput' 
         className="uploadInput"
         type="file"
-        required 
+        required
         onChange={(e) => {
           setFileInput(e.target.files[0])
         }}
@@ -159,8 +164,7 @@ function Form(props) {
         >
           Save
         </button>
-      </div> 
-      
+      </div>   
     </form>  
   );
 }

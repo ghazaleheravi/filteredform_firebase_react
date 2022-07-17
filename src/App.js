@@ -18,7 +18,6 @@ function App() {
 
     getEmployees();
   }, []);
-  console.log('data: ',employees)
 
   function handleClick(e) {
     setFormView(true);
